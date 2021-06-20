@@ -1,12 +1,8 @@
 import { createStore } from 'vuex'
+import favorites from './favorites.module';
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    favorites
   }
 })

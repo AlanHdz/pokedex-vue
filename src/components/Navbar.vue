@@ -7,13 +7,30 @@
             <img src="../assets/pokeapi_256.png" alt="PokeApi" />
           </li>
           <li class="navbar-links">
-            <a href="#">Mis favoritos</a>
+            <a href="#">Total de favoritos: {{ countPokemons }}</a>
           </li>
         </ul>
       </div>
     </nav>
   </header>
 </template>
+
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+export default {
+  setup() {
+    const store = useStore();
+
+    let countPokemons = computed(() => store.getters['favorites/countPokemons'])
+    
+    return {
+      countPokemons
+    }
+
+  },
+}
+</script>
 
 <style scoped>
 .container {

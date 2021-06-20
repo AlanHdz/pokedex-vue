@@ -62,56 +62,51 @@ export default {
     let url = ref("https://pokeapi.co/api/v2/pokemon?limit=9&offset=0");
     let search = ref("");
 
-    const getPokemons = () => {
+    const getPokemons = async () => {
       isLoading.value = true;
-      axios.get(url.value).then((response) => {
-        prevPage.value = response.data.previous;
-        nextPage.value = response.data.next;
-        pokemons.value = response.data.results;
-        isLoading.value = false;
-      });
+      let response = await axios.get(url.value);
+      prevPage.value = response.data.previous;
+      nextPage.value = response.data.next;
+      pokemons.value = response.data.results;
+      isLoading.value = false;
     };
 
-    const getNextPokemons = () => {
+    const getNextPokemons = async () => {
       isLoading.value = true;
-      axios.get(nextPage.value).then((response) => {
-        prevPage.value = response.data.previous;
-        nextPage.value = response.data.next;
-        pokemons.value = response.data.results;
-        isLoading.value = false;
-      });
+      let response = await axios.get(nextPage.value);
+      prevPage.value = response.data.previous;
+      nextPage.value = response.data.next;
+      pokemons.value = response.data.results;
+      isLoading.value = false;
     };
 
-    const getPrevPokemons = () => {
+    const getPrevPokemons = async () => {
       isLoading.value = true;
-      axios.get(prevPage.value).then((response) => {
-        nextPage.value = response.data.next;
-        prevPage.value = response.data.previous;
-        pokemons.value = response.data.results;
-        isLoading.value = false;
-      });
+      let response = await axios.get(prevPage.value);
+      prevPage.value = response.data.previous;
+      nextPage.value = response.data.next;
+      pokemons.value = response.data.results;
+      isLoading.value = false;
     };
 
-    const searchPokemon = () => {
+    const searchPokemon = async () => {
       if (search.value == "" || search.value == null) {
         getPokemons();
       } else {
-        isLoading.value = true;
-        axios
-          .get(
+        try {
+          isLoading.value = true;
+          let response = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${search.value.toLowerCase()}`
-          )
-          .then((response) => {
-            pokemons.value = [];
-            nextPage.value = null;
-            pokemons.value.push(response.data);
-            isLoading.value = false;
-          })
-          .catch((err) => {
-            console.log(err);
-            pokemons.value = [];
-            isLoading.value = false;
-          });
+          );
+          pokemons.value = [];
+          nextPage.value = null;
+          pokemons.value.push(response.data);
+          isLoading.value = false;
+        } catch (error) {
+          console.log(error);
+          pokemons.value = []
+          throw error;
+        }
       }
     };
 
@@ -126,7 +121,7 @@ export default {
       getPokemons,
       searchPokemon,
       getNextPokemons,
-      getPrevPokemons,
+      getPrevPokemons
     };
   },
 };
@@ -141,6 +136,11 @@ export default {
   align-items: center;
   align-content: center;
 }
+
+form {
+  width: 100%;
+}
+
 .flex-buttons {
   display: flex;
   justify-content: center;
