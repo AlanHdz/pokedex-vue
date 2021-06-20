@@ -1,5 +1,7 @@
 # Pokedex Vue
 
+[Demo](https://alanhdz.github.io/pokedex-vue/)
+
 Pokedex created in VueJS, using [PokeApi](https://pokeapi.co) and Vuex
 
 - [X] List of Pokemon
