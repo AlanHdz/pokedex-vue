@@ -1,24 +1,15 @@
-# shop-poke
+# Pokedex Vue
+
+Pokedex created in VueJS, using [PokeApi](https://pokeapi.co) and Vuex
+
+- [X] List of Pokemon
+- [X] Pagination
+- [X] Store your favorites pokemon
+- [X] Save your favorites pokemon in localstorage
+- [ ] Show your favorites pokemon
 
 ## Project setup
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
